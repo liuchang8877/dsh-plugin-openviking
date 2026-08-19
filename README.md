@@ -15,6 +15,13 @@
 pip install openviking          # 注意：装完约 1.1 GB
 ```
 
+密钥建议放 `.env`（已在 .gitignore 中）：
+
+```bash
+cp .env.example .env    # 填入你的 key
+source .env
+```
+
 ### ⚠️ 配置文件的四个坑
 
 `ov.conf` 的格式 README 里没写清楚，这四条是我逐个试出来的：
