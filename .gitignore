@@ -1,0 +1,7 @@
+# 绝对不要提交任何真实配置
+ov.conf
+*.local.yml
+.env
+*.key
+__pycache__/
+.DS_Store

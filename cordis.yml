@@ -1,0 +1,30 @@
+# OpenViking 记忆层接入 DeepSeek Harness
+# 用法：把这段并进你的 cordis.yml，或整份作为插件配置分发
+#
+# 前置：OpenViking 服务已在跑
+#   pip install openviking
+#   openviking-server init && openviking-server
+#   默认监听 127.0.0.1:18790，MCP 端点挂在 /mcp
+
+- id: openviking-memory
+  name: '@deepseek-ai/dsh-mcp-client'
+  config:
+    serverName: viking            # 模型侧工具名前缀：mcp__viking__*
+    transport: streamable-http
+    url: http://127.0.0.1:18790/mcp
+
+    # 若开了鉴权，取消注释
+    # headers:
+    #   Authorization: !!js '`Bearer ${process.env.OPENVIKING_TOKEN}`'
+
+    # 记忆检索可能走向量+LLM，给足超时
+    toolCallTimeoutMs: 120000
+
+    # 记忆层挂了不该拖垮整个 harness，所以不 fail-fast
+    failOnStartupError: false
+
+    reconnect:
+      enabled: true
+      initialDelayMs: 1000
+      maxDelayMs: 30000
+      maxAttempts: 10
